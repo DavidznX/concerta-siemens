@@ -3,9 +3,9 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import json
 
-# ==========================================
-# PROCESSAMENTO DOS ARQUIVOS
-# ==========================================
+
+# Leitura dos arquivos aqui
+
 def processar_arquivos():
     pasta = filedialog.askdirectory(title="Selecione a pasta com arquivos MPF")
     if not pasta:
@@ -14,7 +14,7 @@ def processar_arquivos():
     substituicoes = []
     insercoes = []
 
-    # ---- Ler substituições ----
+    # -- Ler substituições --
     for item in tabela_sub.get_children():
         procurar, substituir = tabela_sub.item(item)["values"]
         if procurar != "":
@@ -32,7 +32,7 @@ def processar_arquivos():
     arquivos_processados = 0
 
     for arquivo in os.listdir(pasta):
-        if arquivo.lower().endswith(".mpf"):
+        if arquivo.lower().endswith(".mpf",".txt",".cn",".iso"):
             caminho = os.path.join(pasta, arquivo)
 
             with open(caminho, "r", encoding="utf-8", errors="ignore") as f:
@@ -62,9 +62,7 @@ def processar_arquivos():
     messagebox.showinfo("Concluído", f"{arquivos_processados} arquivos processados.")
 
 
-# ==========================================
-# EDIÇÃO DE CÉLULAS
-# ==========================================
+# edicao celulas
 def editar_celula(event, tabela):
     item = tabela.identify_row(event.y)
     coluna = tabela.identify_column(event.x)
@@ -98,9 +96,7 @@ def remover_linha(tabela):
 
 
 
-
-
-
+#salvar e carregar os presets
 def salvar_preset():
     arquivo = filedialog.asksaveasfilename(
         defaultextension=".json",
@@ -132,14 +128,6 @@ def salvar_preset():
 
     messagebox.showinfo("Sucesso", "Preset salvo com sucesso!")
 
-
-
-
-
-
-
-
-
 def carregar_preset():
     arquivo = filedialog.askopenfilename(
         filetypes=[("Arquivo JSON", "*.json")],
@@ -161,9 +149,9 @@ def carregar_preset():
         tabela_ins.insert("", "end", values=(linha_texto, numero_linha))
 
     messagebox.showinfo("Sucesso", "Preset carregado!")
-# ==========================================
-# INTERFACE
-# ==========================================
+
+# iu
+
 root = tk.Tk()
 root.title("Editor MPF Industrial")
 root.geometry("800x500")
@@ -171,9 +159,8 @@ root.geometry("800x500")
 notebook = ttk.Notebook(root)
 notebook.pack(fill="both", expand=True)
 
-# ==========================================
-# ABA 1 - SUBSTITUIÇÃO
-# ==========================================
+# Aba 1 - subst
+
 aba_sub = ttk.Frame(notebook)
 notebook.add(aba_sub, text="Substituição")
 
@@ -198,9 +185,9 @@ frame_sub.pack(pady=5)
 ttk.Button(frame_sub, text="Adicionar", command=lambda: adicionar_linha(tabela_sub)).pack(side="left", padx=5)
 ttk.Button(frame_sub, text="Remover", command=lambda: remover_linha(tabela_sub)).pack(side="left", padx=5)
 
-# ==========================================
-# ABA 2 - INSERÇÃO
-# ==========================================
+
+# Aba 2 - Inser
+
 aba_ins = ttk.Frame(notebook)
 notebook.add(aba_ins, text="Inserção de Linhas")
 
@@ -232,9 +219,7 @@ frame_preset.pack(pady=5)
 ttk.Button(frame_preset, text="Salvar Preset", command=salvar_preset).pack(side="left", padx=5)
 ttk.Button(frame_preset, text="Carregar Preset", command=carregar_preset).pack(side="left", padx=5)
 
-# ==========================================
-# BOTÃO PRINCIPAL
-# ==========================================
+# Botão processamento vai aparecer em ambas telas
 ttk.Button(root, text="PROCESSAR ARQUIVOS MPF", command=processar_arquivos).pack(pady=10)
 
 root.mainloop()
