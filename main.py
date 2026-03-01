@@ -32,7 +32,7 @@ def processar_arquivos():
     arquivos_processados = 0
 
     for arquivo in os.listdir(pasta):
-        if arquivo.lower().endswith(".mpf",".txt",".cn",".iso"):
+        if arquivo.lower().endswith(".mpf"):
             caminho = os.path.join(pasta, arquivo)
 
             with open(caminho, "r", encoding="utf-8", errors="ignore") as f:
