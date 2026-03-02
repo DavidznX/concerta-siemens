@@ -32,7 +32,7 @@ def processar_arquivos():
     arquivos_processados = 0
 
     for arquivo in os.listdir(pasta):
-        if arquivo.lower().endswith(".mpf"):
+        if arquivo.lower().endswith(".mpf") or arquivo.lower().endswith(".h") or arquivo.lower().endswith(".iso"):
             caminho = os.path.join(pasta, arquivo)
 
             with open(caminho, "r", encoding="utf-8", errors="ignore") as f:
@@ -220,6 +220,6 @@ ttk.Button(frame_preset, text="Salvar Preset", command=salvar_preset).pack(side=
 ttk.Button(frame_preset, text="Carregar Preset", command=carregar_preset).pack(side="left", padx=5)
 
 # Botão processamento vai aparecer em ambas telas
-ttk.Button(root, text="PROCESSAR ARQUIVOS MPF", command=processar_arquivos).pack(pady=10)
+ttk.Button(root, text="PROCESSAR ARQUIVOS", command=processar_arquivos).pack(pady=10)
 
 root.mainloop()
