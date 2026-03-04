@@ -32,7 +32,7 @@ def processar_arquivos():
     arquivos_processados = 0
 
     for arquivo in os.listdir(pasta):
-        if arquivo.lower().endswith(".mpf") or arquivo.lower().endswith(".h") or arquivo.lower().endswith(".iso"):
+        if arquivo.lower().endswith(".mpf") or arquivo.lower().endswith(".h") or arquivo.lower().endswith(".iso") or arquivo.lower().endswith(".nc") or arquivo.lower().endswith(".cnc"):
             caminho = os.path.join(pasta, arquivo)
 
             with open(caminho, "r", encoding="utf-8", errors="ignore") as f:
